@@ -1,0 +1,24 @@
+{
+  "name": "wuan/php-defer",
+  "description": "php defer",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "wuan",
+      "email": "yaobin24@126.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "symfony/console": "5.x-dev"
+  },
+  "autoload": {
+    "psr-4": {
+      "Wuan\\PhpDefer\\": "src/"
+    },
+    "files": [
+      "src/helper.php"
+    ]
+  }
+}
