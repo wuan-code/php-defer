@@ -1,7 +1,7 @@
 <?php
 
 use Wuan\PhpDefer\Defer;
-use Symfony\Component\Console\Output\OutputInterface;
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 
 if (!function_exists('defer')) {
@@ -17,14 +17,12 @@ if (!function_exists('defer')) {
 }
 
 if (!function_exists('console_exec_time')) {
-    /**
-     * @param OutputInterface $output
-     */
-    function console_exec_time (OutputInterface $output): void {
+    function console_exec_time (): void {
         $startTime = time();
+        $output = new ConsoleOutput();
         $closure = function () use ($startTime, $output) {
             $useTime = time() - $startTime;
-            return $output->writeln("用时: ".$useTime.' 秒');
+            $output->writeln("用时: ".$useTime.' 秒');
         };
         \defer($closure);
     }
@@ -32,14 +30,12 @@ if (!function_exists('console_exec_time')) {
 
 
 if (!function_exists('console_exec_memory')) {
-    /**
-     * @param OutputInterface $output
-     */
-    function console_exec_memory (OutputInterface $output): void {
+    function console_exec_memory (): void {
         $startMemory = memory_get_usage();
+        $output = new ConsoleOutput();
         $closure = function () use ($startMemory, $output) {
             $useMemory = round((memory_get_usage() - $startMemory) / 1024 / 1024, 2);
-            return $output->writeln("内存使用: ".$useMemory.' MB');
+            $output->writeln("内存使用: ".$useMemory.' MB');
         };
         \defer($closure);
     }
