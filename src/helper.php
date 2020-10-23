@@ -22,7 +22,7 @@ if (!function_exists('console_exec_time')) {
         $output = new ConsoleOutput();
         $closure = function () use ($startTime, $output) {
             $useTime = time() - $startTime;
-            $output->writeln("用时: ".$useTime.' 秒');
+            $output->writeln("<info>用时: {$useTime} 秒");
         };
         \defer($closure);
     }
@@ -35,7 +35,7 @@ if (!function_exists('console_exec_memory')) {
         $output = new ConsoleOutput();
         $closure = function () use ($startMemory, $output) {
             $useMemory = round((memory_get_usage() - $startMemory) / 1024 / 1024, 2);
-            $output->writeln("内存使用: ".$useMemory.' MB');
+            $output->writeln("<info>内存使用: {$useMemory} MB</info>");
         };
         \defer($closure);
     }
