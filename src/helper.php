@@ -17,12 +17,15 @@ if (!function_exists('defer')) {
 }
 
 if (!function_exists('console_exec_time')) {
-    function console_exec_time (): void {
+    /**
+     * @param string $consoleName
+     */
+    function console_exec_time (string $consoleName = ''): void {
         $startTime = time();
         $output = new ConsoleOutput();
-        $closure = function () use ($startTime, $output) {
+        $closure = function () use ($consoleName, $startTime, $output) {
             $useTime = time() - $startTime;
-            $output->writeln("<info>用时: {$useTime} 秒");
+            $output->writeln("<info>{$consoleName} 处理用时: {$useTime} 秒 </info>");
         };
         \defer($closure);
     }
@@ -30,12 +33,15 @@ if (!function_exists('console_exec_time')) {
 
 
 if (!function_exists('console_exec_memory')) {
-    function console_exec_memory (): void {
+    /**
+     * @param string $consoleName
+     */
+    function console_exec_memory (string $consoleName = ''): void {
         $startMemory = memory_get_usage();
         $output = new ConsoleOutput();
-        $closure = function () use ($startMemory, $output) {
+        $closure = function () use ($consoleName, $startMemory, $output) {
             $useMemory = round((memory_get_usage() - $startMemory) / 1024 / 1024, 2);
-            $output->writeln("<info>内存使用: {$useMemory} MB</info>");
+            $output->writeln("<info>{$consoleName} 内存使用: {$useMemory} MB</info>");
         };
         \defer($closure);
     }
