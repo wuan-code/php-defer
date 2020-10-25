@@ -46,3 +46,34 @@ if (!function_exists('console_exec_memory')) {
         \defer($closure);
     }
 }
+
+
+if (!function_exists('echo_exec_time')) {
+    /**
+     * @param string $consoleName
+     */
+    function echo_exec_time (string $consoleName = ''): void {
+        $startTime = time();
+        $closure = function () use ($consoleName, $startTime) {
+            $useTime = time() - $startTime;
+            echo "{$consoleName} 处理用时: {$useTime} 秒 ";
+        };
+        \defer($closure);
+    }
+}
+
+
+if (!function_exists('echo_exec_memory')) {
+    /**
+     * @param string $consoleName
+     */
+    function echo_exec_memory (string $consoleName = ''): void {
+        $startMemory = memory_get_usage();
+        $closure = function () use ($consoleName, $startMemory) {
+            $useMemory = round((memory_get_usage() - $startMemory) / 1024 / 1024, 2);
+            echo "{$consoleName} 内存使用: {$useMemory} MB";
+        };
+        \defer($closure);
+    }
+}
+
